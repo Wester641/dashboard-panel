@@ -30,18 +30,53 @@
 
     .sideBarMenuItem {
       @include flex-center;
-      background-color: $background-color;
+      // background-color: $background-color;
       text-decoration: none;
-      min-height: 90px;
+      min-height: 80px;
       min-width: 100%;
       color: $text-color;
-      @include border;
+      position: relative;
+
+      &:hover {
+        color: $orange-color;
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 2px;
+          height: 100%;
+          background-color: $orange-color;
+        }
+      }
     }
+
     .sideBarMenuItemContent {
       @include flex-center;
       min-width: 231px;
       justify-content: start;
       gap: 20px;
     }
+  }
+}
+
+.active {
+  @include flex-center;
+  text-decoration: none;
+  min-height: 80px;
+  min-width: 100%;
+  color: $text-color;
+  position: relative;
+  color: $orange-color;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background-color: $orange-color;
   }
 }

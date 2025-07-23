@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styles from "./SideBarMenu.module.scss";
 import logo from "../../assets/logo.png";
 import GridViewIcon from "@mui/icons-material/GridView";
@@ -36,7 +36,7 @@ const menuItems = [
   },
   {
     name: "Logout",
-    path: "#",
+    path: "/logout",
     icon: <LogoutOutlinedIcon />,
   },
 ];
@@ -49,16 +49,18 @@ export default function SideBarMenu() {
       </Link>
       <div className={styles.sideBarMenu}>
         {menuItems.map((item) => (
-          <Link
+          <NavLink
             key={item.name}
             to={item.path}
-            className={styles.sideBarMenuItem}
+            className={({ isActive }) =>
+              isActive ? styles.active : styles.sideBarMenuItem
+            }
           >
             <div className={styles.sideBarMenuItemContent}>
               {item.icon}
               {item.name}
             </div>
-          </Link>
+          </NavLink>
         ))}
       </div>
     </div>

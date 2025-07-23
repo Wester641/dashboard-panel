@@ -8,6 +8,7 @@ import Products from "./pages/Products/Products";
 import Orders from "./pages/Orders/Orders";
 import HelpCenter from "./pages/HelpCenter/HelpCenter";
 import Settings from "./pages/Settings/Settings";
+import LogOut from "./pages/Logout/LogOut";
 
 // import axios from "axios";
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="orders" element={<Orders />} />
           <Route path="help-center" element={<HelpCenter />} />
           <Route path="setting" element={<Settings />} />
+          <Route path="logout" element={<LogOut />} />
         </Route>
       </Routes>
     </BrowserRouter>
