@@ -11,7 +11,7 @@ import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 const menuItems = [
   {
     name: "Overview",
-    path: "/dashboard",
+    path: "/",
     icon: <GridViewIcon />,
   },
   {
@@ -36,7 +36,7 @@ const menuItems = [
   },
   {
     name: "Logout",
-    path: "/logout",
+    path: "#",
     icon: <LogoutOutlinedIcon />,
   },
 ];

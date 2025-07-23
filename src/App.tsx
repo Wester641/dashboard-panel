@@ -2,8 +2,12 @@
 import "./App.css";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Dashboard from "./pages/Dashboard/Dashboard";
-import ProductsPage from "./pages/ProductsPage/ProductsPage";
+import Dashboard from "./pages/Overview/Overview";
+import Layout from "./components/Layout/Layouts";
+import Products from "./pages/Products/Products";
+import Orders from "./pages/Orders/Orders";
+import HelpCenter from "./pages/HelpCenter/HelpCenter";
+import Settings from "./pages/Settings/Settings";
 
 // import axios from "axios";
 
@@ -17,8 +21,13 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/products" element={<ProductsPage />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="products" element={<Products />} />
+          <Route path="orders" element={<Orders />} />
+          <Route path="help-center" element={<HelpCenter />} />
+          <Route path="setting" element={<Settings />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
