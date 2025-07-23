@@ -1,0 +1,47 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.sideBarMenuWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 37px;
+
+  font-family: "Inter", sans-serif;
+  font-size: 1.1rem;
+
+  .logo {
+    min-height: 90px;
+    background-color: $background-color;
+    text-decoration: none;
+    color: $text-color;
+    @include border;
+    @include flex-center;
+
+    img {
+      max-height: 42px;
+    }
+  }
+
+  .sideBarMenu {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .sideBarMenuItem {
+      @include flex-center;
+      background-color: $background-color;
+      text-decoration: none;
+      min-height: 90px;
+      min-width: 100%;
+      color: $text-color;
+      @include border;
+    }
+    .sideBarMenuItemContent {
+      @include flex-center;
+      min-width: 231px;
+      justify-content: start;
+      gap: 20px;
+    }
+  }
+}
