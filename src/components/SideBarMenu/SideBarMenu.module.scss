@@ -4,14 +4,13 @@
 .sideBarMenuWrapper {
   display: flex;
   flex-direction: column;
-  gap: 37px;
+  gap: 30px;
 
   font-family: "Inter", sans-serif;
   font-size: 1.1rem;
 
   .logo {
-    min-height: 90px;
-    background-color: $background-color;
+    min-height: 100px;
     text-decoration: none;
     color: $text-color;
     @include border;
@@ -30,7 +29,6 @@
 
     .sideBarMenuItem {
       @include flex-center;
-      // background-color: $background-color;
       text-decoration: none;
       min-height: 80px;
       min-width: 100%;
@@ -39,16 +37,6 @@
 
       &:hover {
         color: $orange-color;
-
-        &::after {
-          content: "";
-          position: absolute;
-          top: 0;
-          right: 0;
-          width: 2px;
-          height: 100%;
-          background-color: $orange-color;
-        }
       }
     }
 
@@ -66,7 +54,6 @@
   text-decoration: none;
   min-height: 80px;
   min-width: 100%;
-  color: $text-color;
   position: relative;
   color: $orange-color;
 

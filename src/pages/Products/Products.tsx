@@ -1,7 +1,9 @@
+import ProductsCard from "../../components/ProductsCard";
+
 function Products() {
   return (
     <div>
-      <h1>Добро пожаловать в Products</h1>
+      <ProductsCard />
     </div>
   );
 }

@@ -3,7 +3,7 @@ import "./App.css";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/Overview/Overview";
-import Layout from "./components/Layout/Layouts";
+import Layout from "./layout/Layouts";
 import Products from "./pages/Products/Products";
 import Orders from "./pages/Orders/Orders";
 import HelpCenter from "./pages/HelpCenter/HelpCenter";
