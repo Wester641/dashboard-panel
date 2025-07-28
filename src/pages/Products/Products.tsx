@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ProductsCard from "../../components/ProductsCard";
+import ProductsCard from "../../components/ProductsCard/ProductsCard";
 import { Button, Grid } from "@mui/material";
 
 import styles from "./Products.module.scss";
@@ -15,7 +15,6 @@ function Products() {
       console.log("Error");
     }
   }
-  console.log(data);
 
   return (
     <div>
@@ -29,9 +28,9 @@ function Products() {
           </Link>
         </Grid>
       </Grid>
-      <ProductsCard name="john" age={10} />
+      <ProductsCard error={error} loading={isLoading} products={data} />
     </div>
-  ); 
+  );
 }
 
 export default Products;

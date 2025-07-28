@@ -1,3 +1,11 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
 .gridItem {
-  border: 1px solid #ccc;
+  &:nth-child(1) {
+    border: 1px solid #ccc;
+  }
+  &:nth-child(2) {
+    @include flex-center;
+  }
 }
