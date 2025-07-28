@@ -1,0 +1,51 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.pickFileContainer {
+  label {
+    cursor: pointer;
+    width: 150px;
+    height: 88px;
+    background-color: $pick-file-color;
+    @include flex-center;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    @include flex-center;
+    color: $white-color;
+    font-size: 1.1rem;
+    font-family: "Inter", sans-serif;
+
+    &:hover {
+      background-color: rgba($pick-file-color, 0.8);
+    }
+  }
+
+  input {
+    display: none;
+  }
+}
+.fileNameContainer {
+  div {
+    display: inline-flex;
+    align-items: center;
+    justify-items: space-between;
+    color: $text-color;
+    gap: 10px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: $banner-bg-color;
+  }
+}
+
+.fileNameEmpty {
+  cursor: not-allowed;
+  display: none;
+}
+
+.deleteIcon {
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.2) !important;
+  }
+}

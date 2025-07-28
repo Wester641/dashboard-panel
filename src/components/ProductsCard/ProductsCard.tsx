@@ -1,3 +1,4 @@
+import { Box, LinearProgress } from "@mui/material";
 import type { ProductGET } from "../../types/FormTypes";
 import styles from "./ProductsCard.module.scss";
 
@@ -13,7 +14,11 @@ function ProductsCard({ products, error, loading }: ProductsProps) {
   }
 
   if (loading) {
-    return <div className={styles.loading}>Loading...</div>;
+    return (
+      <Box sx={{ width: "100%" }}>
+        <LinearProgress color="inherit" />
+      </Box>
+    );
   }
 
   if (!products || products.length === 0) {

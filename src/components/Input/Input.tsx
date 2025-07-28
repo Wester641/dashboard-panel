@@ -18,9 +18,7 @@ function InputComponent({
         {...register(name, { required })}
       />
       {errors[name] && (
-        <span className={styles.errorMessage}>
-          {label} field is required
-        </span>
+        <span className={styles.errorMessage}>{label} field is required</span>
       )}
     </div>
   );

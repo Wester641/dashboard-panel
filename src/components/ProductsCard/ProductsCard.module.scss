@@ -1,15 +1,6 @@
 @use "../../styles/variables" as *;
 @use "../../styles/mixins" as *;
 
-.loading {
-  color: $text-color;
-  @include flex-center;
-  height: 100vh;
-
-  font-weight: 600;
-  letter-spacing: 1px;
-}
-
 .productCard {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

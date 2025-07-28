@@ -3,7 +3,8 @@ import styles from "./ProductAddForm.module.scss";
 import { Button } from "@mui/material";
 import InputComponent from "../Input/Input";
 import { useEffect } from "react";
-import type { Inputs } from "../../types/FormTypes";
+import type { ProductPOST } from "../../types/FormTypes";
+import PickFile from "../PickFile/PickFile";
 
 function ProductAddForm() {
   const {
@@ -11,9 +12,9 @@ function ProductAddForm() {
     handleSubmit,
     formState: { errors },
     clearErrors,
-  } = useForm<Inputs>();
+  } = useForm<ProductPOST>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit: SubmitHandler<ProductPOST> = (data) => {
     console.log(data);
     clearErrors();
   };
@@ -37,25 +38,33 @@ function ProductAddForm() {
         <InputComponent
           register={register}
           errors={errors}
-          label="Name"
-          required
-          name="name"
+          label="Title"
+          name="title"
         />
         <InputComponent
           register={register}
           errors={errors}
-          label="Price"
+          label="Base Price"
           required
-          name="price"
+          name="base_price"
         />
-
         <InputComponent
           register={register}
           errors={errors}
-          label="Description"
+          label="SKU"
           required
-          name="description"
+          name="sku"
         />
+        <InputComponent
+          register={register}
+          errors={errors}
+          label="Category"
+          required
+          name="category_id"
+        />
+        <div>
+          <PickFile />
+        </div>
       </div>
       <div className={styles.formGroup}>
         <Button variant="contained">Cancel</Button>
