@@ -1,0 +1,10 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.container {
+  min-height: 100vh;
+  @include border;
+
+  // display: flex;
+  // justify-content: start;
+}

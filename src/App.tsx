@@ -9,6 +9,7 @@ import Orders from "./pages/Orders/Orders";
 import HelpCenter from "./pages/HelpCenter/HelpCenter";
 import Settings from "./pages/Settings/Settings";
 import LogOut from "./pages/Logout/LogOut";
+import ProductsAdd from "./pages/Products/AddForm/ProductsAdd";
 
 // import axios from "axios";
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="products" element={<Products />} />
           <Route path="orders" element={<Orders />} />
           <Route path="help-center" element={<HelpCenter />} />
+          <Route path="products/add" element={<ProductsAdd />} />
           <Route path="setting" element={<Settings />} />
           <Route path="logout" element={<LogOut />} />
         </Route>
