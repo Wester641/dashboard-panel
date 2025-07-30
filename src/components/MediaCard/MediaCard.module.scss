@@ -1,0 +1,19 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.mediaCard {
+  //   @include border;
+
+  height: 200px;
+  @include flex-center;
+  @include border;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    box-sizing: border-box;
+    padding: 10px;
+  }
+}
