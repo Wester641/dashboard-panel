@@ -9,6 +9,9 @@ export interface InputProps {
   label: string;
   required?: boolean;
   name: string;
+  type?: string;
+  defaultValue?: string;
+  multiline?: boolean;
 }
 
 // export interface Product {

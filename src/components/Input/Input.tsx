@@ -8,14 +8,23 @@ function InputComponent({
   label,
   required,
   name,
+  type = "text",
+  defaultValue,
+  multiline,
 }: InputProps) {
   return (
     <div className={styles.inputContainer}>
       <TextField
         id="outlined-basic"
         label={label}
+        defaultValue={defaultValue}
         variant="outlined"
+        type={type}
+        autoComplete="on"
+        multiline={multiline}
+        rows={multiline ? 4 : 1}
         {...register(name, { required })}
+        slotProps={{ inputLabel: { shrink: true } }}
       />
       {errors[name] && (
         <span className={styles.errorMessage}>{label} field is required</span>

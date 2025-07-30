@@ -8,161 +8,175 @@ import PickFile from "../PickFile/PickFile";
 
 const fields = [
   {
-    label: "Title*",
+    label: "Title* (Text)",
     name: "title",
     required: true,
+    defaultValue: "MacBook Air M3",
   },
   {
-    label: "Base Price*",
+    label: "Base Price* (Number)",
     name: "base_price",
     required: true,
+    type: "number",
+    defaultValue: "1200",
   },
   {
-    label: "SKU*",
+    label: "SKU* (Text)",
     name: "sku",
     required: true,
+    defaultValue: "123456",
   },
   {
-    label: "Category*",
+    label: "Category* (Number)",
     name: "category_id",
     required: true,
+    type: "number",
+    defaultValue: "",
   },
+
   {
-    label: "Description",
-    name: "description",
-    required: false,
-  },
-  {
-    label: "Short Description",
-    name: "short_description",
-    required: false,
-  },
-  {
-    label: "Slug",
+    label: "Slug (Text)",
     name: "slug",
     required: false,
+    defaultValue: "",
   },
   {
-    label: "Old Price",
+    label: "Old Price (Number)",
     name: "old_price",
     required: false,
+    type: "number",
+    defaultValue: "",
   },
   {
-    label: "Stock State",
+    label: "Stock State (Text)",
     name: "stock_state",
     required: false,
+    defaultValue: "",
   },
   {
-    label: "Total Stock",
+    label: "Total Stock (Number)",
     name: "total_stock",
     required: false,
+    type: "number",
+    defaultValue: "",
   },
   {
-    label: "Min Order Quantity",
+    label: "Min Order Quantity (Number)",
     name: "min_order_quantity",
     required: false,
+    type: "number",
+    defaultValue: "",
   },
   {
-    label: "Meta Title",
+    label: "Meta Title (Text)",
     name: "meta_title",
     required: false,
+    defaultValue: "",
   },
   {
-    label: "Meta Description",
+    label: "Meta Description (Text)",
     name: "meta_description",
     required: false,
+    defaultValue: "",
   },
   {
-    label: "Brand",
+    label: "Brand (Number)",
     name: "brand_id",
     required: false,
+    type: "number",
+    defaultValue: "",
   },
   {
-    label: "Shop",
+    label: "Shop (Number)",
     name: "shop_id",
     required: false,
+    type: "number",
+    defaultValue: "",
   },
   {
-    label: "Tag",
+    label: "Tag (Number)",
     name: "tag_ids",
     required: false,
+    type: "number",
+    defaultValue: "",
   },
   {
-    label: "Image",
+    label: "Image (Link)",
     name: "image_ids",
     required: false,
+    defaultValue: "",
   },
   {
-    label: "Is Active",
+    label: "Is Active (Yes / No)",
     name: "is_active",
     required: false,
+    defaultValue: "",
   },
   {
-    label: "Is Featured",
+    label: "Is Featured (Yes / No)",
     name: "is_featured",
     required: false,
+    defaultValue: "",
   },
   {
-    label: "Shop Name",
+    label: "Shop Name (Text)",
     name: "shop_name",
     required: false,
+    defaultValue: "",
   },
   {
-    label: "Delivered By",
+    label: "Delivered By (Text)",
     name: "delivered_by",
     required: false,
+    defaultValue: "",
   },
   {
-    label: "Specifications",
+    label: "Specifications (Text)",
     name: "specifications",
     required: false,
+    defaultValue: "",
   },
   {
-    label: "Colors",
+    label: "Colors (Text)",
     name: "colors",
     required: false,
+    defaultValue: "",
   },
   {
-    label: "Tags",
+    label: "Tags (Text)",
     name: "tags_names",
     required: false,
+    defaultValue: "",
   },
   {
-    label: "Rating",
+    label: "Rating (Number)",
     name: "rating",
     required: false,
+    type: "number",
+    defaultValue: "",
   },
   {
-    label: "Review Count",
+    label: "Review Count (Number)",
     name: "reviewCount",
     required: false,
+    type: "number",
+    defaultValue: "",
+  },
+  {
+    label: "Description (Text)",
+    name: "description",
+    required: false,
+    defaultValue: "",
+    multiline: true,
+  },
+  {
+    label: "Short Description (Text)",
+    name: "short_description",
+    required: false,
+    defaultValue: "",
+    multiline: true,
   },
 ];
-
-// description?: string;
-// short_description?: string;
-// slug?: string;
-// old_price?: number;
-// stock_state?: "Available" | "OutOfStock" | "PreOrder";
-// total_stock?: number;
-// min_order_quantity?: number;
-// meta_title?: string;
-// meta_description?: string;
-// brand_id?: number;
-// shop_id?: number;
-// is_active?: boolean;
-// is_featured?: boolean;
-// tag_ids?: number[];
-// image_ids?: number[];
-// shop_name?: string | null;
-// delivered_by?: string;
-// specifications?: {
-//   [key: string]: string[];
-// };
-// colors?: string[];
-// tags_names?: string[];
-// rating?: number | string;
-// reviewCount?: number | string;
 
 function ProductAddForm() {
   const {
@@ -192,7 +206,7 @@ function ProductAddForm() {
       <div className={styles.formGroup}>
         <h2>Add Product</h2>
       </div>
-      <div className={styles.formGroup}>
+      <div className={styles.formInput}>
         {fields.map((field) => (
           <div key={field.name}>
             <InputComponent
@@ -201,6 +215,9 @@ function ProductAddForm() {
               label={field.label}
               name={field.name}
               required={field.required}
+              type={field.type}
+              defaultValue={field.defaultValue}
+              multiline={field.multiline}
             />
           </div>
         ))}
