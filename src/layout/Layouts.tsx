@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import { Grid } from "@mui/material";
 import styles from "./Layout.module.scss";
 import SideBarMenu from "../components/SideBarMenu/SideBarMenu";
+import Header from "../components/Common/Header/Header";
 
 export default function Layout() {
   return (
@@ -11,7 +12,7 @@ export default function Layout() {
       </Grid>
 
       <Grid size={{ xs: 12, md: 9.5 }} className={styles.gridItem}>
-        <div className={styles.header}>asdkn</div>
+        <Header />
         <Outlet />
       </Grid>
     </Grid>

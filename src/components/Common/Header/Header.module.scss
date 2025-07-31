@@ -1,0 +1,58 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.header {
+  @include flex-center;
+  background-color: $white-color;
+  min-height: 100px;
+  @include border;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+
+  div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    &:nth-child(1) {
+      font-size: 1.3rem;
+      font-weight: 600;
+      font-family: "Inter", sans-serif;
+
+      span {
+        &:nth-child(1) {
+          height: 40px;
+          width: 40px;
+          background-color: $text-color;
+          border-radius: 50%;
+        }
+      }
+    }
+
+    &:nth-child(2) {
+      flex: 1;
+
+      input {
+        width: 100%;
+        padding: 12px;
+        border-radius: 12px;
+        background-color: $banner-bg-color;
+        border: 0;
+      }
+    }
+    &:nth-child(3) {
+      display: flex;
+      align-items: center;
+
+      svg:hover {
+        transform: scale(1.2);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+    }
+  }
+}
