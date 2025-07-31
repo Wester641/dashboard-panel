@@ -1,2 +1,14 @@
 @use "../../styles/variables" as *;
 @use "../../styles/mixins" as *;
+
+.gridItem {
+  background-color: $white-color;
+  border-radius: 12px;
+
+  &:nth-child(2) {
+    @include flex-center;
+  }
+}
+.gridContainer {
+  margin-bottom: 20px;
+}

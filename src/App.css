@@ -353,7 +353,7 @@ template {
   width: 2px;
 }
 ::-webkit-scrollbar:horizontal {
-  height: 2px;
+  height: 0px;
 }
 
 ::-webkit-scrollbar-track {
