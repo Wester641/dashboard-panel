@@ -1,8 +1,10 @@
+import { Container } from "@mui/material";
+
 function LogOut() {
   return (
-    <div>
+    <Container maxWidth="xl">
       <h1>Добро пожаловать в LogOut</h1>
-    </div>
+    </Container>
   );
 }
 

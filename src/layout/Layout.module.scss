@@ -1,8 +1,17 @@
+@use "../styles/variables" as *;
+@use "../styles/mixins" as *;
+
 .gridItem {
-  padding: 10px;
-  background-color: #ffffff;
+  background-color: $white-color;
 
   &:nth-child(2) {
     background-color: transparent !important;
   }
+}
+
+.header {
+  @include flex-center;
+  background-color: $white-color;
+  min-height: 100px;
+  @include border;
 }

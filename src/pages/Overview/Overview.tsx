@@ -2,6 +2,7 @@ import RevenueByCategory from "../../components/Revenues/RevenueByCategory/Reven
 import styles from "./Overview.module.scss";
 import VectorDown from "../../assets/VectorDown.svg";
 import VectorUp from "../../assets/VectorUp.svg";
+import { Container } from "@mui/material";
 
 const revenueByCategory = [
   {
@@ -49,11 +50,9 @@ const revenueByCategory = [
 ];
 function Overview() {
   return (
-    <div className={styles.container}>
-      <h1>Добро пожаловать в Dashboard</h1>
-
+    <Container maxWidth="xl">
       <RevenueByCategory data={revenueByCategory} />
-    </div>
+    </Container>
   );
 }
 

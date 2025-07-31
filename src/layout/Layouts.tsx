@@ -5,12 +5,13 @@ import SideBarMenu from "../components/SideBarMenu/SideBarMenu";
 
 export default function Layout() {
   return (
-    <Grid container spacing={2}>
+    <Grid container>
       <Grid size={{ xs: 12, md: 2.5 }} className={styles.gridItem}>
         <SideBarMenu />
       </Grid>
 
       <Grid size={{ xs: 12, md: 9.5 }} className={styles.gridItem}>
+        <div className={styles.header}>asdkn</div>
         <Outlet />
       </Grid>
     </Grid>

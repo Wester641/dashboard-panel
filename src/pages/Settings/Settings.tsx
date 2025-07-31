@@ -1,8 +1,10 @@
+import { Container } from "@mui/material";
+
 function Settings() {
   return (
-    <div>
+    <Container maxWidth="xl">
       <h1>Добро пожаловать в Settings</h1>
-    </div>
+    </Container>
   );
 }
 

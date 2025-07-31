@@ -1,10 +1,10 @@
 import ProductAddForm from "../../../components/AddForms/ProductAddForm";
-import styles from "./ProductsAdd.module.scss";
+import { Container } from "@mui/material";
 
 export default function ProductsAdd() {
   return (
-    <div className={styles.container}>
+    <Container maxWidth="xl">
       <ProductAddForm />
-    </div>
+    </Container>
   );
 }

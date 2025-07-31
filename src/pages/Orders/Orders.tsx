@@ -1,8 +1,10 @@
+import { Container } from "@mui/material";
+
 function Orders() {
   return (
-    <div>
+    <Container maxWidth="xl">
       <h1>Добро пожаловать в Orders</h1>
-    </div>
+    </Container>
   );
 }
 
