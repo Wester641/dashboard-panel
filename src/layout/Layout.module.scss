@@ -1,4 +1,8 @@
 .gridItem {
   padding: 10px;
   background-color: #ffffff;
+
+  &:nth-child(2) {
+    background-color: transparent !important;
+  }
 }

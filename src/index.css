@@ -71,3 +71,10 @@ body {
   background-color: #f5f5f5;
   font-family: "Inter", sans-serif;
 }
+
+.scroller {
+  scrollbar-color: #f48031 #ffffff;
+}
+.scroller {
+  scrollbar-width: thin;
+}

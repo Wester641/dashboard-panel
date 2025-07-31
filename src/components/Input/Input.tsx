@@ -15,7 +15,7 @@ function InputComponent({
 }: InputProps) {
   const reference = createRef<HTMLInputElement>();
 
-  // Prevents the user from scrolling the input field when it is focused (input="number")
+  // Solution for input type number (input="number"), bug in MUI TextField while 
   if (type === "number") {
     useEffect(() => {
       const reff = reference.current;
