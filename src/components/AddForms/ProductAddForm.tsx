@@ -185,8 +185,8 @@ function ProductAddForm() {
       stock_state: "Available",
       colors: [],
       specifications: specifications,
-      slug: time.toString(),
-      sku: time.toString(),
+      slug: data.slug + time.toString(),
+      sku: data.sku + time.toString(),
     };
 
     axiosInstance

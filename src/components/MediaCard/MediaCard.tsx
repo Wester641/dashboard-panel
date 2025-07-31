@@ -40,6 +40,11 @@ export default function MediaCard({ products }: MediaCardProps) {
     if (confirm) {
       const response = await axiosInstance.delete("/products/" + products.id);
       console.log(response);
+
+      if (response.status === 204) {
+        alert("Product deleted successfully");
+        window.location.reload();
+      }
     }
 
     if (!confirm) return;
@@ -52,7 +57,7 @@ export default function MediaCard({ products }: MediaCardProps) {
           className={styles.mediaCardImg}
           src={
             products.image ||
-            "https://res.cloudinary.com/dx2cycu19/image/upload/v1747590123/samples/chair.png"
+            "https://res.cloudinary.com/dx2cycu19/image/upload/v1753938846/3840x2160-tiffany-blue-solid-color-background_1_nbuljm.jpg"
           }
           alt="img"
         />
