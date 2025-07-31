@@ -3,8 +3,13 @@ import styles from "./ProductAddForm.module.scss";
 import { Button } from "@mui/material";
 import InputComponent from "../Input/Input";
 import { useEffect } from "react";
-import type { ProductPOST } from "../../types/FormTypes";
+import type {
+  ProductPOST,
+  StrictSpecificationsType,
+} from "../../types/FormTypes";
 import PickFile from "../PickFile/PickFile";
+import { axiosInstance } from "../../lib/axios";
+import { useNavigate } from "react-router-dom";
 
 const fields = [
   {
@@ -25,13 +30,6 @@ const fields = [
     name: "sku",
     required: true,
     defaultValue: "123456",
-  },
-  {
-    label: "Category* (Number)",
-    name: "category_id",
-    required: true,
-    type: "number",
-    defaultValue: "",
   },
 
   {
@@ -80,71 +78,32 @@ const fields = [
     defaultValue: "",
   },
   {
-    label: "Brand (Number)",
-    name: "brand_id",
-    required: false,
-    type: "number",
-    defaultValue: "",
-  },
-  {
-    label: "Shop (Number)",
-    name: "shop_id",
-    required: false,
-    type: "number",
-    defaultValue: "",
-  },
-  {
-    label: "Tag (Number)",
-    name: "tag_ids",
-    required: false,
-    type: "number",
-    defaultValue: "",
-  },
-  {
-    label: "Image (Link)",
-    name: "image_ids",
-    required: false,
-    defaultValue: "",
-  },
-  {
-    label: "Is Active (Yes / No)",
-    name: "is_active",
-    required: false,
-    defaultValue: "",
-  },
-  {
-    label: "Is Featured (Yes / No)",
-    name: "is_featured",
-    required: false,
-    defaultValue: "",
-  },
-  {
-    label: "Shop Name (Text)",
-    name: "shop_name",
-    required: false,
-    defaultValue: "",
-  },
-  {
     label: "Delivered By (Text)",
     name: "delivered_by",
     required: false,
     defaultValue: "",
   },
   {
-    label: "Specifications (Text)",
-    name: "specifications",
+    label: "Specification Prop 1 URLs (comma separated)",
+    name: "spec_prop1",
+    required: false,
+    defaultValue: "",
+  },
+  {
+    label: "Specification Prop 2 URLs (comma separated)",
+    name: "spec_prop2",
+    required: false,
+    defaultValue: "",
+  },
+  {
+    label: "Specification Prop 3 URLs (comma separated)",
+    name: "spec_prop3",
     required: false,
     defaultValue: "",
   },
   {
     label: "Colors (Text)",
     name: "colors",
-    required: false,
-    defaultValue: "",
-  },
-  {
-    label: "Tags (Text)",
-    name: "tags_names",
     required: false,
     defaultValue: "",
   },
@@ -178,7 +137,11 @@ const fields = [
   },
 ];
 
+const time = new Date().getTime();
+
 function ProductAddForm() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -187,7 +150,63 @@ function ProductAddForm() {
   } = useForm<ProductPOST>();
 
   const onSubmit: SubmitHandler<ProductPOST> = (data) => {
-    console.log(data);
+    const specifications: StrictSpecificationsType = {};
+
+    if (data.spec_prop1) {
+      specifications.additionalProp1 = data.spec_prop1
+        .split(",")
+        .map((url) => url.trim());
+    }
+    if (data.spec_prop2) {
+      specifications.additionalProp2 = data.spec_prop2
+        .split(",")
+        .map((url) => url.trim());
+    }
+    if (data.spec_prop3) {
+      specifications.additionalProp3 = data.spec_prop3
+        .split(",")
+        .map((url) => url.trim());
+    }
+
+    const transformedData: ProductPOST = {
+      ...data,
+      base_price: Number(data.base_price),
+      old_price: data.old_price ? Number(data.old_price) : undefined,
+      total_stock: data.total_stock ? Number(data.total_stock) : undefined,
+      min_order_quantity: data.min_order_quantity
+        ? Number(data.min_order_quantity)
+        : undefined,
+      rating: data.rating ? Number(data.rating) : undefined,
+      reviewCount: data.reviewCount ? Number(data.reviewCount) : undefined,
+      category_id: 1,
+      brand_id: 1,
+      is_active: true,
+      is_featured: false,
+      stock_state: "Available",
+      colors: [],
+      specifications: specifications,
+      slug: time.toString(),
+      sku: time.toString(),
+    };
+
+    axiosInstance
+      .post("/products/", transformedData)
+      .then((res) => {
+        console.log(res);
+        console.log(res.status);
+
+        if (res.status === 201) {
+          alert("Product added successfully");
+          navigate("/products/");
+          return;
+        } else {
+          alert("Something went wrong");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        alert(err.response.data.detail || "Something went wrong");
+      });
     clearErrors();
   };
 

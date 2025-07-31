@@ -51,7 +51,7 @@ export default function MediaCard({ products }: MediaCardProps) {
         <img
           className={styles.mediaCardImg}
           src={
-            products.specifications?.spec_images?.[0] ||
+            products.image ||
             "https://res.cloudinary.com/dx2cycu19/image/upload/v1747590123/samples/chair.png"
           }
           alt="img"

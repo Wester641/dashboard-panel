@@ -10,7 +10,7 @@ export interface InputProps {
   required?: boolean;
   name: string;
   type?: string;
-  defaultValue?: string;
+  defaultValue?: string | null;
   multiline?: boolean;
 }
 
@@ -43,6 +43,25 @@ export interface InputProps {
 //   reviewCount: string | null;
 // }
 
+// "specifications": {
+//   "additionalProp1": [
+//     "https://res.cloudinary.com/dx2cycu19/image/upload//v1747591248/air1_jgyucc.jpg"
+//   ],
+//   "additionalProp2": [
+//     "https://res.cloudinary.com/dx2cycu19/image/upload//v2744621248/air1_jgyucc.jpg"
+//   ],
+//   "additionalProp3": [
+//     "https://res.cloudinary.com/dx2cycu19/image/upload//v3747591248/air1_jgyucc.jpg"
+//   ]
+// },
+
+export type StrictSpecificationsType = {
+  additionalProp1?: string[];
+  additionalProp2?: string[];
+  additionalProp3?: string[];
+  [key: string]: string[] | undefined;
+};
+
 export type ProductPOST = {
   // required fields
   title: string;
@@ -64,17 +83,15 @@ export type ProductPOST = {
   shop_id?: number;
   is_active?: boolean;
   is_featured?: boolean;
-  tag_ids?: number[];
-  image_ids?: number[];
   shop_name?: string | null;
   delivered_by?: string;
-  specifications?: {
-    [key: string]: string[];
-  };
   colors?: string[];
-  tags_names?: string[];
   rating?: number | string;
   reviewCount?: number | string;
+  specifications?: StrictSpecificationsType;
+  spec_prop1?: string;
+  spec_prop2?: string;
+  spec_prop3?: string;
 };
 
 export type ProductGET = {

@@ -6,11 +6,11 @@ import SideBarMenu from "../components/SideBarMenu/SideBarMenu";
 export default function Layout() {
   return (
     <Grid container spacing={2}>
-      <Grid size={{ xs: 12, md: 3 }} className={styles.gridItem}>
+      <Grid size={{ xs: 12, md: 2.5 }} className={styles.gridItem}>
         <SideBarMenu />
       </Grid>
 
-      <Grid size={{ xs: 12, md: 9 }} className={styles.gridItem}>
+      <Grid size={{ xs: 12, md: 9.5 }} className={styles.gridItem}>
         <Outlet />
       </Grid>
     </Grid>
