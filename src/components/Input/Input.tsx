@@ -1,6 +1,7 @@
 import { TextField } from "@mui/material";
 import type { InputProps } from "../../types/FormTypes";
 import styles from "./Input.module.scss";
+import { createRef, useEffect } from "react";
 
 function InputComponent({
   register,
@@ -12,10 +13,24 @@ function InputComponent({
   defaultValue,
   multiline,
 }: InputProps) {
+  const reference = createRef<HTMLInputElement>();
+
+  // Prevents the user from scrolling the input field when it is focused (input="number")
+  if (type === "number") {
+    useEffect(() => {
+      const reff = reference.current;
+      const wheelHandler = () => {
+        reff?.blur();
+      };
+      reff?.addEventListener("wheel", wheelHandler);
+      return () => reff?.removeEventListener("wheel", wheelHandler);
+    }, [reference]);
+  }
+
   return (
     <div className={styles.inputContainer}>
       <TextField
-        id="outlined-basic"
+        inputRef={reference}
         label={label}
         defaultValue={defaultValue}
         variant="outlined"
@@ -26,6 +41,7 @@ function InputComponent({
         {...register(name, { required })}
         slotProps={{ inputLabel: { shrink: true } }}
       />
+
       {errors[name] && (
         <span className={styles.errorMessage}>{label} field is required</span>
       )}
