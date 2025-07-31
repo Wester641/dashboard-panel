@@ -6,31 +6,11 @@ import Typography from "@mui/material/Typography";
 import type { ProductGET } from "../../types/FormTypes";
 import styles from "./MediaCard.module.scss";
 import { axiosInstance } from "../../lib/axios";
+import { createTheme } from "@mui/material";
 
 type MediaCardProps = {
   products: ProductGET;
 };
-
-// id: number;
-// stock_state: "Available" | "OutOfStock" | "PreOrder";
-// total_stock: number;
-// rating: number | string;
-// reviewCount: number | string;
-// title: string;
-// shop_name: string;
-// price: number;
-// old_price: string;
-// new_price: string;
-// image: string;
-// delivered_by: string;
-// discount: string;
-// sku: string;
-// description: string;
-// specifications: {
-//   spec_images: string[];
-// };
-// colors: string[];
-// tags: string[];
 
 export default function MediaCard({ products }: MediaCardProps) {
   const handleDelete = async () => {
@@ -53,9 +33,11 @@ export default function MediaCard({ products }: MediaCardProps) {
     if (!confirm) return;
   };
 
+  const theme = createTheme();
+
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <div className={styles.mediaCard}>
+    <Card sx={{ maxWidth: 345, minHeight: theme.spacing(20) }}>
+      <div className={styles.mediaCardImageContainer}>
         <img
           className={styles.mediaCardImg}
           src={
@@ -65,36 +47,38 @@ export default function MediaCard({ products }: MediaCardProps) {
           alt="img"
         />
       </div>
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {products.title}
-        </Typography>
-        <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          {products.description}
-        </Typography>
-        <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          {products.id}
-        </Typography>
-        <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          {products.stock_state}
-        </Typography>
-        <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          {products.total_stock}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button
-          variant="contained"
-          color="error"
-          size="small"
-          onClick={handleDelete}
-        >
-          Delete
-        </Button>
-        <Button variant="contained" color="primary" size="small">
-          Edit
-        </Button>
-      </CardActions>
+      <div className={styles.mediaCardContentContainer}>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {products.title}
+          </Typography>
+          <Typography variant="body2" sx={{ color: "text.secondary" }}>
+            {products.description}
+          </Typography>
+          <Typography variant="body2" sx={{ color: "text.secondary" }}>
+            {products.id}
+          </Typography>
+          <Typography variant="body2" sx={{ color: "text.secondary" }}>
+            {products.stock_state}
+          </Typography>
+          <Typography variant="body2" sx={{ color: "text.secondary" }}>
+            {products.total_stock}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button
+            variant="contained"
+            color="error"
+            size="small"
+            onClick={handleDelete}
+          >
+            Delete
+          </Button>
+          <Button variant="contained" color="primary" size="small">
+            Edit
+          </Button>
+        </CardActions>
+      </div>
     </Card>
   );
 }

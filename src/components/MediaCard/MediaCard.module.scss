@@ -1,7 +1,7 @@
 @use "../../styles/variables" as *;
 @use "../../styles/mixins" as *;
 
-.mediaCard {
+.mediaCardImageContainer {
   //   @include border;
 
   height: 200px;
@@ -16,4 +16,11 @@
     box-sizing: border-box;
     padding: 10px;
   }
+}
+
+.mediaCardContentContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 250px;
 }
