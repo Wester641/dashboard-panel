@@ -38,13 +38,16 @@ export default function MediaCard({ products }: MediaCardProps) {
       "Are you sure you want to delete this product?"
     );
     if (confirm) {
-      const response = await axiosInstance.delete("/products/" + products.id);
-      console.log(response);
-
-      if (response.status === 204) {
-        alert("Product deleted successfully");
-        window.location.reload();
-      }
+      await axiosInstance
+        .delete("/products/" + products.id)
+        .then(() => {
+          alert("Product deleted successfully.");
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.log(error);
+          alert("Product deleted failed!");
+        });
     }
 
     if (!confirm) return;
