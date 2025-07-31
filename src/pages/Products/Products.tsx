@@ -17,10 +17,10 @@ function Products() {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <Grid container spacing={2}>
         <Grid className={styles.gridItem} size={{ xs: 12, md: 9 }}>
-          asd
+          <h1>Product list page</h1>
         </Grid>
         <Grid className={styles.gridItem} size={{ xs: 12, md: 3 }}>
           <Link to="/products/add">

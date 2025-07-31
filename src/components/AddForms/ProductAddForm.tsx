@@ -1,4 +1,4 @@
-import { useForm, type SubmitHandler } from "react-hook-form";
+import { Controller, useForm, type SubmitHandler } from "react-hook-form";
 import styles from "./ProductAddForm.module.scss";
 import { Button } from "@mui/material";
 import InputComponent from "../Input/Input";
@@ -7,147 +7,28 @@ import type {
   ProductPOST,
   StrictSpecificationsType,
 } from "../../types/FormTypes";
-import PickFile from "../PickFile/PickFile";
+// import PickFile from "../PickFile/PickFile";
 import { axiosInstance } from "../../lib/axios";
 import { useNavigate } from "react-router-dom";
-
-const fields = [
-  {
-    label: "Title* (Text)",
-    name: "title",
-    required: true,
-    defaultValue: "MacBook Air M3",
-  },
-  {
-    label: "Base Price* (Number)",
-    name: "base_price",
-    required: true,
-    type: "number",
-    defaultValue: "1200",
-  },
-  {
-    label: "SKU* (Text)",
-    name: "sku",
-    required: true,
-    defaultValue: "123456",
-  },
-
-  {
-    label: "Slug (Text)",
-    name: "slug",
-    required: false,
-    defaultValue: "",
-  },
-  {
-    label: "Old Price (Number)",
-    name: "old_price",
-    required: false,
-    type: "number",
-    defaultValue: "",
-  },
-  {
-    label: "Stock State (Text)",
-    name: "stock_state",
-    required: false,
-    defaultValue: "",
-  },
-  {
-    label: "Total Stock (Number)",
-    name: "total_stock",
-    required: false,
-    type: "number",
-    defaultValue: "",
-  },
-  {
-    label: "Min Order Quantity (Number)",
-    name: "min_order_quantity",
-    required: false,
-    type: "number",
-    defaultValue: "",
-  },
-  {
-    label: "Meta Title (Text)",
-    name: "meta_title",
-    required: false,
-    defaultValue: "",
-  },
-  {
-    label: "Meta Description (Text)",
-    name: "meta_description",
-    required: false,
-    defaultValue: "",
-  },
-  {
-    label: "Delivered By (Text)",
-    name: "delivered_by",
-    required: false,
-    defaultValue: "",
-  },
-  {
-    label: "Specification Prop 1 URLs (comma separated)",
-    name: "spec_prop1",
-    required: false,
-    defaultValue: "",
-  },
-  {
-    label: "Specification Prop 2 URLs (comma separated)",
-    name: "spec_prop2",
-    required: false,
-    defaultValue: "",
-  },
-  {
-    label: "Specification Prop 3 URLs (comma separated)",
-    name: "spec_prop3",
-    required: false,
-    defaultValue: "",
-  },
-  {
-    label: "Colors (Text)",
-    name: "colors",
-    required: false,
-    defaultValue: "",
-  },
-  {
-    label: "Rating (Number)",
-    name: "rating",
-    required: false,
-    type: "number",
-    defaultValue: "",
-  },
-  {
-    label: "Review Count (Number)",
-    name: "reviewCount",
-    required: false,
-    type: "number",
-    defaultValue: "",
-  },
-  {
-    label: "Description (Text)",
-    name: "description",
-    required: false,
-    defaultValue: "",
-    multiline: true,
-  },
-  {
-    label: "Short Description (Text)",
-    name: "short_description",
-    required: false,
-    defaultValue: "",
-    multiline: true,
-  },
-];
-
-const time = new Date().getTime();
+import BasicSelect from "../BasicSelect/BasicSelect";
+import MultipleSelect from "../MultipleSelect/MultipleSelect";
+import { addFormFields, time } from "../../helpers/constance";
 
 function ProductAddForm() {
   const navigate = useNavigate();
 
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
     clearErrors,
-  } = useForm<ProductPOST>();
+  } = useForm<ProductPOST>({
+    defaultValues: {
+      stock_state: "Available",
+      colors: [],
+    },
+  });
 
   const onSubmit: SubmitHandler<ProductPOST> = (data) => {
     const specifications: StrictSpecificationsType = {};
@@ -182,12 +63,14 @@ function ProductAddForm() {
       brand_id: 1,
       is_active: true,
       is_featured: false,
-      stock_state: "Available",
-      colors: [],
+      stock_state: data.stock_state || "Available",
+      colors: data.colors || [],
       specifications: specifications,
       slug: data.slug + time.toString(),
       sku: data.sku + time.toString(),
     };
+
+    console.log("Transformed Data:", transformedData);
 
     axiosInstance
       .post("/products/", transformedData)
@@ -205,9 +88,14 @@ function ProductAddForm() {
       })
       .catch((err) => {
         console.log(err);
-        alert(err.response.data.detail || "Something went wrong");
+        alert(err.response?.data?.detail || "Something went wrong");
       });
+
     clearErrors();
+  };
+
+  const handleCancel = () => {
+    navigate("/products");
   };
 
   useEffect(() => {
@@ -226,7 +114,7 @@ function ProductAddForm() {
         <h2>Add Product</h2>
       </div>
       <div className={styles.formInput}>
-        {fields.map((field) => (
+        {addFormFields.map((field) => (
           <div key={field.name}>
             <InputComponent
               register={register}
@@ -241,12 +129,52 @@ function ProductAddForm() {
           </div>
         ))}
         <div>
-          <PickFile />
+          <Controller
+            name="stock_state"
+            control={control}
+            rules={{
+              required: "Stock state is required",
+            }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <BasicSelect
+                onChange={onChange}
+                onBlur={onBlur}
+                value={value}
+                error={!!errors.stock_state}
+              />
+            )}
+          />
+          {errors.stock_state && (
+            <span style={{ color: "red" }}>{errors.stock_state.message}</span>
+          )}
+
+          <Controller
+            name="colors"
+            control={control}
+            rules={{
+              validate: (value) =>
+                value && value.length > 0
+                  ? true
+                  : "Please select at least one color",
+            }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <MultipleSelect
+                onChange={onChange}
+                onBlur={onBlur}
+                value={value}
+                error={!!errors.colors}
+              />
+            )}
+          />
+
+          {/* <PickFile /> */}
         </div>
       </div>
       <div className={styles.formGroup}>
-        <Button variant="contained">Cancel</Button>
-        <Button variant="contained" type="submit">
+        <Button variant="contained" onClick={handleCancel} type="button">
+          Cancel
+        </Button>
+        <Button variant="contained" color="success" type="submit">
           Save
         </Button>
       </div>

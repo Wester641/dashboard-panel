@@ -1,0 +1,101 @@
+export const addFormFields = [
+  {
+    label: "Title* (Text)",
+    name: "title",
+    required: true,
+    defaultValue: "MacBook Air M3",
+  },
+  {
+    label: "Base Price* (Number)",
+    name: "base_price",
+    required: true,
+    type: "number",
+    defaultValue: "1200",
+  },
+  {
+    label: "Old Price (Number)",
+    name: "old_price",
+    required: false,
+    type: "number",
+    defaultValue: "",
+  },
+  {
+    label: "SKU* (Text)",
+    name: "sku",
+    required: true,
+    defaultValue: "123456",
+  },
+  {
+    label: "Total Stock (Number)",
+    name: "total_stock",
+    required: false,
+    type: "number",
+    defaultValue: "",
+  },
+  {
+    label: "Meta Title (Text)",
+    name: "meta_title",
+    required: false,
+    defaultValue: "",
+  },
+  {
+    label: "Meta Description (Text)",
+    name: "meta_description",
+    required: false,
+    defaultValue: "",
+  },
+  {
+    label: "Delivered By (Text)",
+    name: "delivered_by",
+    required: false,
+    defaultValue: "",
+  },
+  {
+    label: "Image 1 URLs (comma separated)",
+    name: "spec_prop1",
+    required: false,
+    defaultValue: "",
+  },
+  {
+    label: "Image 2 URLs (comma separated)",
+    name: "spec_prop2",
+    required: false,
+    defaultValue: "",
+  },
+  {
+    label: "Image 3 URLs (comma separated)",
+    name: "spec_prop3",
+    required: false,
+    defaultValue: "",
+  },
+  {
+    label: "Rating (Number)",
+    name: "rating",
+    required: false,
+    type: "number",
+    defaultValue: "",
+  },
+  {
+    label: "Review Count (Number)",
+    name: "reviewCount",
+    required: false,
+    type: "number",
+    defaultValue: "",
+  },
+  {
+    label: "Description (Text)",
+    name: "description",
+    required: false,
+    defaultValue: "",
+    multiline: true,
+  },
+  {
+    label: "Short Description (Text)",
+    name: "short_description",
+    required: false,
+    defaultValue: "",
+    multiline: true,
+  },
+];
+
+export const time = new Date().getTime();

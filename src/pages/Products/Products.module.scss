@@ -2,10 +2,15 @@
 @use "../../styles/mixins" as *;
 
 .gridItem {
+  margin-bottom: 20px;
   &:nth-child(1) {
-    border: 1px solid #ccc;
+    box-sizing: border-box;
+    padding-left: 20px;
   }
   &:nth-child(2) {
     @include flex-center;
+    justify-content: end;
+    box-sizing: border-box;
+    padding-right: 20px;
   }
 }
