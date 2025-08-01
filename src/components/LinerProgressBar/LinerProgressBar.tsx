@@ -9,8 +9,8 @@ function LinearProgressWithLabel(
 ) {
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
-      <Box sx={{ width: "100%", mr: 1 }}>
-        <LinearProgress variant="determinate" {...props} />
+      <Box sx={{ width: "100%", mr: 1, backgroundColor: "#f5f5f5" }}>
+        <LinearProgress variant="determinate" {...props} color="error" />
       </Box>
       <Box sx={{ minWidth: 35 }}>
         <Typography
@@ -27,7 +27,7 @@ export default function LinearWithValueLabel({ value }: { value: number }) {
 
   return (
     <Box sx={{ width: "100%" }}>
-      <LinearProgressWithLabel color="primary" value={progressValue} />
+      <LinearProgressWithLabel value={progressValue} />
     </Box>
   );
 }

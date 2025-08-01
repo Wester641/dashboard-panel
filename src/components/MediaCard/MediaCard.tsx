@@ -7,6 +7,7 @@ import type { ProductGET } from "../../types/FormTypes";
 import styles from "./MediaCard.module.scss";
 import { axiosInstance } from "../../lib/axios";
 import { createTheme } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
 type MediaCardProps = {
   products: ProductGET;
@@ -49,9 +50,11 @@ export default function MediaCard({ products }: MediaCardProps) {
       </div>
       <div className={styles.mediaCardContentContainer}>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {products.title}
-          </Typography>
+          <NavLink to={`/products/${products.id}`}>
+            <Typography gutterBottom variant="h5" component="div">
+              {products.title}
+            </Typography>
+          </NavLink>
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
             {products.description}
           </Typography>
