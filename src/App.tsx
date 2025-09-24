@@ -11,6 +11,7 @@ import Settings from "./pages/Settings/Settings";
 import LogOut from "./pages/Logout/LogOut";
 import ProductsAdd from "./pages/Products/AddForm/ProductsAdd";
 import ProductDetailPage from "./pages/Products/DetailPage/ProductDetailPage";
+import EditForm from "./pages/Products/EditForm/EditForm";
 
 // import axios from "axios";
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="help-center" element={<HelpCenter />} />
           <Route path="products/add" element={<ProductsAdd />} />
           <Route path="products/:id" element={<ProductDetailPage />} />
+          <Route path="products/:id/edit" element={<EditForm />} />
           <Route path="setting" element={<Settings />} />
           <Route path="logout" element={<LogOut />} />
         </Route>

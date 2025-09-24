@@ -24,3 +24,12 @@
   justify-content: space-between;
   min-height: 250px;
 }
+
+.mediaCardTitle {
+  font-size: 1.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}

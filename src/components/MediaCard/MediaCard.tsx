@@ -50,10 +50,11 @@ export default function MediaCard({ products }: MediaCardProps) {
       </div>
       <div className={styles.mediaCardContentContainer}>
         <CardContent>
-          <NavLink to={`/products/${products.id}`}>
-            <Typography gutterBottom variant="h5" component="div">
-              {products.title}
-            </Typography>
+          <NavLink
+            to={`/products/${products.id}`}
+            className={styles.mediaCardTitle}
+          >
+            {products.title}
           </NavLink>
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
             {products.description}
@@ -77,9 +78,11 @@ export default function MediaCard({ products }: MediaCardProps) {
           >
             Delete
           </Button>
-          <Button variant="contained" color="primary" size="small">
-            Edit
-          </Button>
+          <NavLink to={`/products/${products.id}/edit`}>
+            <Button variant="contained" color="primary" size="small">
+              Edit
+            </Button>
+          </NavLink>
         </CardActions>
       </div>
     </Card>
