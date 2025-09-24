@@ -7,7 +7,7 @@ import type { ProductGET } from "../../types/FormTypes";
 import styles from "./MediaCard.module.scss";
 import { axiosInstance } from "../../lib/axios";
 import { createTheme } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 type MediaCardProps = {
   products: ProductGET;
@@ -32,6 +32,12 @@ export default function MediaCard({ products }: MediaCardProps) {
     }
 
     if (!confirm) return;
+  };
+
+  const navigate = useNavigate();
+
+  const handleEdit = () => {
+    navigate(`/products/${products.id}/edit`);
   };
 
   const theme = createTheme();
