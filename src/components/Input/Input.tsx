@@ -15,7 +15,7 @@ function InputComponent({
 }: InputProps) {
   const reference = createRef<HTMLInputElement>();
 
-  // Solution for input type number (input="number"), bug in MUI TextField while 
+  // Solution for input type number (input="number"), bug in MUI TextField while
   if (type === "number") {
     useEffect(() => {
       const reff = reference.current;
