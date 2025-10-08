@@ -99,7 +99,7 @@ export type ProductCreateOnSupaBase = {
   created_at?: string;
   description: string;
   id?: number;
-  image_url: string[];
+  image_url: { value: string }[];
   old_price?: number;
   price: number;
   sku: number;

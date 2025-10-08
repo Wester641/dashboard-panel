@@ -1,10 +1,9 @@
-import { Box, Container, Grid, LinearProgress } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import type { ProductGET } from "../../types/FormTypes";
 import MediaCard from "../MediaCard/MediaCard";
 
 type ProductsProps = {
   error: any;
-  // loading: boolean;
   products: ProductGET[];
 };
 

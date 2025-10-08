@@ -25,7 +25,7 @@ function ProductAddForm() {
   } = useForm<ProductCreateOnSupaBase>({
     defaultValues: {
       stock_state: "Available",
-      image_url: [""],
+      image_url: [{ value: "" }],
     },
   });
 
