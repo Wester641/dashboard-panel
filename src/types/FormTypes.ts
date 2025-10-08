@@ -109,24 +109,15 @@ export type ProductCreateOnSupaBase = {
 };
 
 export type ProductGET = {
-  id: number;
-  stock_state: "Available" | "OutOfStock" | "PreOrder";
-  total_stock: number;
-  rating: number | string;
-  reviewCount: number | string;
-  title: string;
-  shop_name: string;
-  price: number;
-  old_price: string;
-  new_price: string;
-  image: string;
-  delivered_by: string;
-  discount: string;
-  sku: string;
-  description: string;
-  specifications: {
-    spec_images: string[];
-  };
   colors: string[];
-  tags: string[];
+  created_at?: string;
+  description: string;
+  id?: number;
+  image_url: { value: string }[];
+  old_price?: number;
+  price: number;
+  sku: number;
+  stock_state?: "Available" | "OutOfStock" | "PreOrder";
+  title: string;
+  total_stock: number;
 };
