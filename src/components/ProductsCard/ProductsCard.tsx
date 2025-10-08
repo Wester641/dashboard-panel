@@ -4,22 +4,22 @@ import MediaCard from "../MediaCard/MediaCard";
 
 type ProductsProps = {
   error: any;
-  loading: boolean;
+  // loading: boolean;
   products: ProductGET[];
 };
 
-function ProductsCard({ products, error, loading }: ProductsProps) {
+function ProductsCard({ products, error }: ProductsProps) {
   if (error) {
     return <div>{error}</div>;
   }
 
-  if (loading) {
-    return (
-      <Box sx={{ width: "100%" }}>
-        <LinearProgress color="inherit" />
-      </Box>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <Box sx={{ width: "100%" }}>
+  //       <LinearProgress color="inherit" />
+  //     </Box>
+  //   );
+  // }
 
   if (!products || products.length === 0) {
     return <div>No products found</div>;

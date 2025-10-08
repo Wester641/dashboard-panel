@@ -34,9 +34,9 @@ export default function BasicSelect({
           onChange={handleChange}
           onBlur={onBlur}
         >
-          <MenuItem value="Available">Available</MenuItem>
-          <MenuItem value="OutOfStock">Out of Stock</MenuItem>
-          <MenuItem value="PreOrder">Pre Order</MenuItem>
+          <MenuItem value="available">Available</MenuItem>
+          <MenuItem value="out_of_stock">Out of Stock</MenuItem>
+          <MenuItem value="pre_order">Pre Order</MenuItem>
         </Select>
         {error && <FormHelperText>Please select a stock state</FormHelperText>}
       </FormControl>

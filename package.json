@@ -17,6 +17,7 @@
     "@mui/material": "^7.2.0",
     "@mui/styled-engine-sc": "^7.2.0",
     "@mui/x-charts": "^8.9.2",
+    "@supabase/supabase-js": "^2.74.0",
     "@tanstack/react-query": "^5.83.0",
     "@vercel/node": "^5.3.24",
     "axios": "^1.10.0",

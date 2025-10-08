@@ -1,0 +1,11 @@
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 12px;
+  font-family: "Inter", sans-serif;
+  margin-top: 5px;
+}

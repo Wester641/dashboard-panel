@@ -1,18 +1,17 @@
-import { Controller, useForm, type SubmitHandler } from "react-hook-form";
+import { Controller, useFieldArray, useForm, type SubmitHandler } from "react-hook-form";
 import styles from "./ProductAddForm.module.scss";
 import { Button } from "@mui/material";
 import InputComponent from "../Input/Input";
 import { useEffect } from "react";
-import type {
-  ProductPOST,
-  StrictSpecificationsType,
-} from "../../types/FormTypes";
-// import PickFile from "../PickFile/PickFile";
-import { axiosInstance } from "../../lib/axios";
+import type { ProductCreateOnSupaBase } from "../../types/FormTypes";
+
+
 import { useNavigate } from "react-router-dom";
 import BasicSelect from "../BasicSelect/BasicSelect";
 import MultipleSelect from "../MultipleSelect/MultipleSelect";
-import { addFormFields, time } from "../../helpers/constance";
+import { addFormFields } from "../../helpers/constance";
+import supabase from "../../supabase/supabase-client";
+import ImageInput from "../ImageInput/ImageInput";
 
 function ProductAddForm() {
   const navigate = useNavigate();
@@ -21,82 +20,60 @@ function ProductAddForm() {
     register,
     control,
     handleSubmit,
-    formState: { errors },
     clearErrors,
-  } = useForm<ProductPOST>({
+    formState: { errors },
+  } = useForm<ProductCreateOnSupaBase>({
     defaultValues: {
       stock_state: "Available",
-      colors: [],
+      image_url: [""],
     },
   });
 
-  const onSubmit: SubmitHandler<ProductPOST> = (data) => {
-    const specifications: StrictSpecificationsType = {};
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "image_url", // will fixed soon.
+  });
 
-    if (data.spec_prop1) {
-      specifications.additionalProp1 = data.spec_prop1
-        .split(",")
-        .map((url) => url.trim());
-    }
-    if (data.spec_prop2) {
-      specifications.additionalProp2 = data.spec_prop2
-        .split(",")
-        .map((url) => url.trim());
-    }
-    if (data.spec_prop3) {
-      specifications.additionalProp3 = data.spec_prop3
-        .split(",")
-        .map((url) => url.trim());
-    }
 
-    const transformedData: ProductPOST = {
-      ...data,
-      base_price: Number(data.base_price),
-      old_price: data.old_price ? Number(data.old_price) : undefined,
-      total_stock: data.total_stock ? Number(data.total_stock) : undefined,
-      min_order_quantity: data.min_order_quantity
-        ? Number(data.min_order_quantity)
-        : undefined,
-      rating: data.rating ? Number(data.rating) : undefined,
-      reviewCount: data.reviewCount ? Number(data.reviewCount) : undefined,
-      category_id: 1,
-      brand_id: 1,
-      is_active: true,
-      is_featured: false,
-      stock_state: data.stock_state || "Available",
-      colors: data.colors || [],
-      specifications: specifications,
-      slug: data.slug + time.toString(),
-      sku: data.sku + time.toString(),
+
+  const onSubmit: SubmitHandler<ProductCreateOnSupaBase> = async (data) => {
+    const transformedData: ProductCreateOnSupaBase = {
+      colors: data.colors,
+      description: data.description,
+      image_url: data.image_url,
+      old_price: Number(data.old_price),
+      price: Number(data.price),
+      sku: Number(data.sku),
+      stock_state: data.stock_state,
+      title: data.title,
+      total_stock: Number(data.total_stock),
     };
 
-    console.log("Transformed Data:", transformedData);
 
-    axiosInstance
-      .post("/products/", transformedData)
-      .then((res) => {
-        console.log(res);
-        console.log(res.status);
+    console.log(transformedData)
 
-        if (res.status === 201) {
-          alert("Product added successfully");
-          navigate("/products/");
-          return;
-        } else {
-          alert("Something went wrong");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        alert(err.response?.data?.detail || "Something went wrong");
-      });
+    const { data: insertedData, error } = await supabase
+      .from("products")
+      .insert([transformedData])
+      .select();
 
+    if (error) {
+      console.error("Supabase insert error:", error.message);
+      return;
+    }
+
+    console.log("✅ Inserted product:", insertedData);
+
+    console.log(transformedData)
     clearErrors();
+    navigate("/products");
   };
 
   const handleCancel = () => {
     navigate("/products");
   };
+
+
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -107,6 +84,7 @@ function ProductAddForm() {
       return () => clearTimeout(timer);
     }
   }, [errors, clearErrors]);
+
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
@@ -129,6 +107,44 @@ function ProductAddForm() {
           </div>
         ))}
         <div>
+          <div>
+            <h3>Images</h3>
+            {fields.map((field, index) => (
+              <div
+                className={styles.imageContainer}
+                key={field.id}
+              >
+
+                <div className={styles.imageInput}>
+                  <ImageInput
+                    register={register}
+                    name={`image_url.${index}.value`}
+                    label={`Image URL ${index + 1}`}
+                    type="text"
+                    errors={errors}
+                  />
+                </div>
+
+                <div className={styles.removeBtn}>
+
+
+
+                  <button
+                    className={styles.removeBtn}
+                    onClick={() => remove(index)}
+                  >
+                    ✕
+                  </button>
+                </div>
+              </div>
+            ))}
+            <button className={styles.addImageBtn} onClick={() => append({ value: "" })}>
+              + Add Image
+            </button>
+          </div>
+
+
+
           <Controller
             name="stock_state"
             control={control}
@@ -167,7 +183,7 @@ function ProductAddForm() {
             )}
           />
 
-          {/* <PickFile /> */}
+
         </div>
       </div>
       <div className={styles.formGroup}>
