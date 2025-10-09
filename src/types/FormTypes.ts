@@ -94,12 +94,26 @@ export type ProductPOST = {
   spec_prop3?: string;
 };
 
+export type ProductFormData = {
+  colors: string[];
+  created_at?: string;
+  description: string;
+  id?: number;
+  image_url: { value: string }[]; // Для формы
+  old_price?: number;
+  price: number;
+  sku: number;
+  stock_state: "Available" | "OutOfStock" | "PreOrder";
+  title: string;
+  total_stock: number;
+};
+
 export type ProductCreateOnSupaBase = {
   colors: string[];
   created_at?: string;
   description: string;
   id?: number;
-  image_url: { value: string }[];
+  image_url: string[];
   old_price?: number;
   price: number;
   sku: number;

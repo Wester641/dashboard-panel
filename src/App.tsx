@@ -1,4 +1,3 @@
-// import { useEffect } from "react";
 import "./App.css";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -13,14 +12,9 @@ import ProductsAdd from "./pages/Products/AddForm/ProductsAdd";
 import ProductDetailPage from "./pages/Products/DetailPage/ProductDetailPage";
 import EditForm from "./pages/Products/EditForm/EditForm";
 
-// import axios from "axios";
+
 
 function App() {
-  // useEffect(() => {`
-  //   axios.get("http://192.168.0.32:8000/api/v1/products/").then((res) => {
-  //     console.log(res.data);
-  //   });
-  // }, []);
 
   return (
     <BrowserRouter>

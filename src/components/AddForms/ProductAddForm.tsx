@@ -3,7 +3,7 @@ import styles from "./ProductAddForm.module.scss";
 import { Button } from "@mui/material";
 import InputComponent from "../Input/Input";
 import { useEffect } from "react";
-import type { ProductCreateOnSupaBase } from "../../types/FormTypes";
+import type { ProductCreateOnSupaBase, ProductFormData } from "../../types/FormTypes";
 
 
 import { useNavigate } from "react-router-dom";
@@ -22,25 +22,31 @@ function ProductAddForm() {
     handleSubmit,
     clearErrors,
     formState: { errors },
-  } = useForm<ProductCreateOnSupaBase>({
+  } = useForm<ProductFormData>({
     defaultValues: {
       stock_state: "Available",
       image_url: [{ value: "" }],
+      colors: [],
+      description: "",
+      price: 0,
+      sku: 0,
+      title: "",
+      total_stock: 0,
     },
   });
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "image_url", // will fixed soon.
+    name: "image_url",
   });
 
 
 
-  const onSubmit: SubmitHandler<ProductCreateOnSupaBase> = async (data) => {
+  const onSubmit: SubmitHandler<ProductFormData> = async (data) => {
     const transformedData: ProductCreateOnSupaBase = {
       colors: data.colors,
       description: data.description,
-      image_url: data.image_url,
+      image_url: data.image_url.map(img => img.value),
       old_price: Number(data.old_price),
       price: Number(data.price),
       sku: Number(data.sku),
