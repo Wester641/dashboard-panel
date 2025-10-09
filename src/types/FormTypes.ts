@@ -127,7 +127,7 @@ export type ProductGET = {
   created_at?: string;
   description: string;
   id?: number;
-  image_url: { value: string }[];
+  image_url: string[];
   old_price?: number;
   price: number;
   sku: number;

@@ -37,21 +37,23 @@ export default function ProductDetailPage() {
 
 
 
+
+
   return (
     <Container maxWidth="xl" className={styles.container}>
       <Grid justifyContent="center" alignItems="center" container spacing={4}>
         <Grid className={styles.gridItem} size={{ xs: 12, md: 6 }}>
           <img
             src={
-              product.image_url?.[0].value ||
+              product.image_url[0] ||
               "https://res.cloudinary.com/dx2cycu19/image/upload/v1753938846/3840x2160-tiffany-blue-solid-color-background_1_nbuljm.jpg"
             }
             alt={product.title}
           />
           <div className={styles.specification}>
             {product.image_url !== null && product.image_url.map((image: any) => {
-              return <div>
-                <img src={image.value || "https://res.cloudinary.com/dx2cycu19/image/upload/v1753938846/3840x2160-tiffany-blue-solid-color-background_1_nbuljm.jpg"
+              return <div key={image}>
+                <img src={image || "https://res.cloudinary.com/dx2cycu19/image/upload/v1753938846/3840x2160-tiffany-blue-solid-color-background_1_nbuljm.jpg"
                 } alt="" />
               </div>
             })}

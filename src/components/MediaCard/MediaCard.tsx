@@ -35,14 +35,6 @@ export default function MediaCard({ products }: MediaCardProps) {
     window.location.reload();
   }
 
-
-
-  // const navigate = useNavigate();
-
-  // const handleEdit = () => {
-  //   navigate(`/products/${products.id}/edit`);
-  // };
-
   const theme = createTheme();
 
   return (
@@ -51,7 +43,7 @@ export default function MediaCard({ products }: MediaCardProps) {
         <img
           className={styles.mediaCardImg}
           src={
-            products.image_url[0].value ||
+            products.image_url[0] ||
             "https://res.cloudinary.com/dx2cycu19/image/upload/v1753938846/3840x2160-tiffany-blue-solid-color-background_1_nbuljm.jpg"
           }
           alt="img"
