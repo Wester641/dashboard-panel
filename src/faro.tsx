@@ -8,11 +8,13 @@ import {
 import { TracingInstrumentation } from "@grafana/faro-web-tracing";
 
 initializeFaro({
-  url: 'https://faro-collector-prod-us-west-0.grafana.net/collect/5d219d05e94e58278eb9d20a79915322',
+  url:
+    import.meta.env.VITE_FARO_COLLECTOR_URL ||
+    "https://faro-collector-prod-us-west-0.grafana.net/collect/5d219d05e94e58278eb9d20a79915322",
   app: {
-    name: 'lnm-frontend',
-    version: '1.0.0',
-    environment: 'production'
+    name: "lnm-frontend",
+    version: "1.0.0",
+    environment: import.meta.env.MODE,
   },
 
   instrumentations: [

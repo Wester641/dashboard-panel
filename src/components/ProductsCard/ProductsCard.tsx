@@ -3,13 +3,13 @@ import type { ProductGET } from "../../types/FormTypes";
 import MediaCard from "../MediaCard/MediaCard";
 
 type ProductsProps = {
-  error: any;
+  error: Error | null;
   products: ProductGET[];
 };
 
 function ProductsCard({ products, error }: ProductsProps) {
   if (error) {
-    return <div>{error}</div>;
+    return <div>{error.message}</div>;
   }
 
   // if (loading) {

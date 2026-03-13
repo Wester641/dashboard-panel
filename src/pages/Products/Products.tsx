@@ -1,23 +1,19 @@
 import { Link } from "react-router-dom";
 import ProductsCard from "../../components/ProductsCard/ProductsCard";
-import { Button, Container, Grid } from "@mui/material";
+import { Box, Button, Container, Grid, LinearProgress } from "@mui/material";
 import styles from "./Products.module.scss";
-import { useEffect, useState } from "react";
-import supabase from "../../supabase/supabase-client";
+import { useProducts } from "../../hooks/useProducts";
 
 function Products() {
-  const [data, setData] = useState<any>();
-  const [error, setError] = useState<any>();
+  const { data, error, isLoading } = useProducts();
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  const fetchProducts = async () => {
-    const { data, error } = await supabase.from("products").select("*");
-    setData(data);
-    setError(error);
-  };
+  if (isLoading) {
+    return (
+      <Box sx={{ width: "100%" }}>
+        <LinearProgress color="inherit" />
+      </Box>
+    );
+  }
 
   return (
     <Container maxWidth="xl">
@@ -31,7 +27,7 @@ function Products() {
           </Link>
         </Grid>
       </Grid>
-      <ProductsCard error={error} products={data} />
+      <ProductsCard error={error} products={data ?? []} />
     </Container>
   );
 }

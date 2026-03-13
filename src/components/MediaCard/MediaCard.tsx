@@ -5,40 +5,31 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import type { ProductGET } from "../../types/FormTypes";
 import styles from "./MediaCard.module.scss";
-import { createTheme } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import supabase from "../../supabase/supabase-client";
+import { useDeleteProduct } from "../../hooks/useProducts";
 
 type MediaCardProps = {
   products: ProductGET;
 };
 
 export default function MediaCard({ products }: MediaCardProps) {
-
+  const deleteProduct = useDeleteProduct();
 
   const handleDelete = async () => {
-    const confirm = window.confirm(
-      "Are you sure you want to delete this product?"
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this product?",
     );
-    if (!confirm) return;
-    const { data: deletedData, error } = await supabase
-      .from("products")
-      .delete()
-      .eq("id", products.id);
+    if (!confirmed) return;
 
-
-    if (error) {
-      console.error("Supabase delete error:", error.message);
-      return;
-    }
-    alert(`Product deleted successfully. ${deletedData}`);
-    window.location.reload();
-  }
-
-  const theme = createTheme();
+    deleteProduct.mutate(products.id!, {
+      onError: (error) => {
+        console.error("Delete error:", error.message);
+      },
+    });
+  };
 
   return (
-    <Card sx={{ maxWidth: 345, minHeight: theme.spacing(20) }}>
+    <Card sx={{ maxWidth: 345, minHeight: 160 }}>
       <div className={styles.mediaCardImageContainer}>
         <img
           className={styles.mediaCardImg}

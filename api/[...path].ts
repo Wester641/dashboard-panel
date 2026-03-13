@@ -5,8 +5,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Получаем путь после /api/
     const path = req.url?.replace("/api/", "") || "";
 
-    // Строим полный URL к вашему backend
-    const url = `http://165.227.142.6/api/v1/${path}`;
+    const backendBase =
+      process.env.API_BACKEND_URL || "http://165.227.142.6/api/v1";
+    const url = `${backendBase}/${path}`;
 
     console.log("Proxying request to:", url);
 
@@ -31,7 +32,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader(
       "Access-Control-Allow-Methods",
-      "GET, POST, PUT, DELETE, OPTIONS"
+      "GET, POST, PUT, DELETE, OPTIONS",
     );
     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 

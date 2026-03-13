@@ -11,7 +11,7 @@ import type {
 import { useNavigate, useParams } from "react-router-dom";
 import BasicSelect from "../BasicSelect/BasicSelect";
 import MultipleSelect from "../MultipleSelect/MultipleSelect";
-import { addFormFields } from "../../helpers/constance";
+import { addFormFields } from "../../helpers/constants";
 import { useProducts } from "../../hooks/useProducts";
 
 function ProductEditForm() {
@@ -34,7 +34,7 @@ function ProductEditForm() {
 
   if (error) return <p>Error loading product</p>;
 
-  const product = data?.find((item: { id: number }) => item.id === Number(id));
+  const product = data?.find((item) => item.id === Number(id));
 
   if (!product) return <p>Product not found</p>;
 
@@ -89,8 +89,7 @@ function ProductEditForm() {
       stock_state: data.stock_state || "Available",
       colors: data.colors || [],
       specifications: specifications,
-      slug: product.slug,
-      sku: product.sku,
+      sku: String(product.sku),
     };
 
     console.log("Transformed Data:", transformedData);
@@ -146,7 +145,10 @@ function ProductEditForm() {
               name={field.name}
               required={field.required}
               type={field.type}
-              defaultValue={product[field.name] || "No Data"}
+              defaultValue={
+                (product[field.name as keyof typeof product] as string) ||
+                "No Data"
+              }
               multiline={field.multiline}
             />
           </div>

@@ -1,11 +1,8 @@
-export type Inputs = {
-  name: string;
-  price: string;
-};
+import type { FieldErrors, UseFormRegister } from "react-hook-form";
 
 export interface InputProps {
-  register: any;
-  errors: any;
+  register: UseFormRegister<any>;
+  errors: FieldErrors;
   label: string;
   required?: boolean;
   name: string;
@@ -13,47 +10,6 @@ export interface InputProps {
   defaultValue?: string | null;
   multiline?: boolean;
 }
-
-// export interface Product {
-//   title: string;
-//   slug: string | null;
-//   description: string | null;
-//   short_description: string | null;
-//   sku: string;
-//   base_price: number;
-//   old_price: number | null;
-//   stock_state: string;
-//   total_stock: number;
-//   min_order_quantity: number;
-//   meta_title: string | null;
-//   meta_description: string | null;
-//   category_id: number;
-//   brand_id: number | null;
-//   shop_id: number | null;
-//   is_active: boolean;
-//   is_featured: boolean;
-//   tag_ids: number[];
-//   image_ids: number[];
-//   shop_name: string | null;
-//   delivered_by: string;
-//   specifications: Record<string, string[]>;
-//   colors: string[];
-//   tags_names: string[];
-//   rating: string | null;
-//   reviewCount: string | null;
-// }
-
-// "specifications": {
-//   "additionalProp1": [
-//     "https://res.cloudinary.com/dx2cycu19/image/upload//v1747591248/air1_jgyucc.jpg"
-//   ],
-//   "additionalProp2": [
-//     "https://res.cloudinary.com/dx2cycu19/image/upload//v2744621248/air1_jgyucc.jpg"
-//   ],
-//   "additionalProp3": [
-//     "https://res.cloudinary.com/dx2cycu19/image/upload//v3747591248/air1_jgyucc.jpg"
-//   ]
-// },
 
 export type StrictSpecificationsType = {
   additionalProp1?: string[];

@@ -1,5 +1,5 @@
 import Map from "../../../assets/Earth.svg";
-import LinearWithValueLabel from "../../LinerProgressBar/LinerProgressBar";
+import LinearWithValueLabel from "../../LinearProgressBar/LinearProgressBar";
 import styles from "./MapChart.module.scss";
 function MapsChart() {
   return (
